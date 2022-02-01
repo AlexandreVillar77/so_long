@@ -5,35 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 14:51:46 by avillar           #+#    #+#             */
-/*   Updated: 2022/01/03 15:42:32 by avillar          ###   ########.fr       */
+/*   Created: 2022/02/01 12:21:21 by avillar           #+#    #+#             */
+/*   Updated: 2022/02/01 12:23:05 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-void    ft_putchar(char c, int fd)
+void	ft_putchar(char c, int fd)
 {
-    if (fd == -1)
-        fd = 1;
-    write(fd, &c, 1);
+	if (fd == -1)
+		fd = 1;
+	write(fd, &c, 1);
 }
 
-int     ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int i;
-    
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void    ft_putstr(char *str, int fd)
+void	ft_putstr(char *str, int fd)
 {
-    if (fd == -1)
-        fd = 1;
-    write(fd, str, ft_strlen(str));
+	if (fd == -1)
+		fd = 1;
+	write(fd, str, ft_strlen(str));
 }
 
 char	*ft_strcpy(char *src)
@@ -42,7 +42,8 @@ char	*ft_strcpy(char *src)
 	char	*dst;
 
 	i = 0;
-	if (!(dst = malloc(sizeof(char) * (ft_strlen(src) + 1))))
+	dst = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!dst)
 		return (0);
 	while (src[i])
 	{
@@ -62,8 +63,8 @@ char	*ft_strcat(char *src, char *tmp)
 	i = 0;
 	x = 0;
 	dst = malloc(sizeof(char) * (ft_strlen(tmp) + ft_strlen(src) + 1));
-    if (!dst)
-        exit(0);
+	if (!dst)
+		exit(0);
 	while (tmp[i])
 	{
 		dst[i] = tmp[i];
