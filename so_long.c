@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/01 12:27:49 by avillar          ###   ########.fr       */
+/*   Updated: 2022/02/02 14:42:28 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_map	failed_map(void)
 	t_map	mapres;
 
 	mapres.map = NULL;
-	mapres.L = 0;
-	mapres.H = 0;
+	mapres.l = 0;
+	mapres.h = 0;
 	return (mapres);
 }
 
@@ -32,10 +32,10 @@ t_map	init_map(char *map)
 	x = 0;
 	while (map[i] != '\n')
 		i++;
-	mapres.L = i;
+	mapres.l = i;
 	while (map[x])
 		x += i;
-	mapres.H = x / i - 1;
+	mapres.h = x / i - 1;
 	mapres.map = malloc(sizeof(char) * ft_strlen(map) + 1);
 	if (!mapres.map)
 		return (failed_map());
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 	{
 		ft_putstr("veuillez renseigner le nom d'une map.\n", 1);
-//		exit (0);
+		exit (0);
 	}
 	//so_long(argv[1]);
 }

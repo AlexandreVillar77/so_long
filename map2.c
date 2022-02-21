@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:10:51 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/01 12:14:55 by avillar          ###   ########.fr       */
+/*   Updated: 2022/02/02 14:31:53 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	sameL(t_map map)
 		i = 0;
 		while (map.map[x + i] != '\n' && map.map[x + i] != '\0')
 			i++;
-		if (i != map.L)
+		if (i != map.l)
 			return (1);
-		x = x + map.L + 1;
+		x = x + map.l + 1;
 	}
 	return (0);
 }
@@ -76,4 +76,20 @@ int	checkchar2(t_map map)
 	if (x >= ft_strlen(map.map))
 		return (1);
 	return (0);
+}
+
+int	recup_fd(char *map)
+{
+	int	fd;
+
+	errno = 0;
+	fd = open(map, O_RDWR);
+	if (errno > 0)
+	{
+		close(fd);
+		perror("Error ");
+		ft_putchar('\n', 1);
+		return (0);
+	}
+	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 14:47:09 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/01 12:13:00 by avillar          ###   ########.fr       */
+/*   Updated: 2022/02/02 14:40:35 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ char	*checkbuf(char *buf, char *keep)
 {
 	char	*tmp;
 
-	if (!keep)
+	if (keep == NULL)
 	{
-		keep = malloc(sizeof(char) * 1);
+		keep = malloc(sizeof(char));
 		if (!keep)
-			return (0);
+			exit(0);
 		keep[0] = '\0';
 	}
 	tmp = ft_strcpy(keep);
@@ -37,24 +37,21 @@ char	*recup_map(char *map)
 	char	*mapres;
 	int		i;
 
-	i = 1;
-	fd = open(map, O_RDWR);
-	if (errno != 0)
-	{
-		close(fd);
-		perror("Error\n");
+	fd = recup_fd(map);
+	if (fd == 0)
 		exit(0);
-	}
 	buf = malloc(sizeof(char) + 1);
-	while ((i > 0) && buf)
-	{
-		i = read(fd, buf, 10);
-		buf[i] = '\0';
-		mapres = checkbuf(buf, mapres);
-	}
-	close (fd);
 	if (!buf)
 		exit(0);
+	i = read(fd, buf, 10);
+	mapres = NULL;
+	while ((i > 0) && buf)
+	{
+		buf[i] = '\0';
+		mapres = checkbuf(buf, mapres);
+		i = read(fd, buf, 10);
+	}
+	close (fd);
 	free (buf);
 	return (mapres);
 }
@@ -83,14 +80,14 @@ int	check_rectangle(t_map map)
 	{
 		if (map.map[x] != '1')
 			return (1);
-		x = x + map.L - 1;
+		x = x + map.l - 1;
 		if (map.map[x] != '1' && map.map[x])
 			return (1);
 		x += 2;
 	}
 	//printf("x after = %d ,,,,, taille map = %d\", x, ft_strlen(map.map));
 	//printf("x = %d, map taille %d\n", (map.L + 1) * (map.H - 1), ft_strlen(map.map));
-	if (check_border(map, (map.L + 1) * (map.H - 1)) == 1)
+	if (check_border(map, (map.l + 1) * (map.h - 1)) == 1)
 		return (1);
 	return (0);
 }
