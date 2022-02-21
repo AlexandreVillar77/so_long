@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/01 14:18:44 by avillar          ###   ########.fr       */
+/*   Updated: 2022/02/07 12:18:55 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <string.h>
 # include <mlx.h>
+//# include <X11/keysim.h>
 
 //structure pour la map
 typedef struct s_map{
@@ -35,6 +36,12 @@ typedef struct s_img{
 	int			line_lgt;
 	int			endian;
 }				t_img;
+
+typedef struct s_mlx{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}	t_mlx;
+
 
 //fichier utils.c
 void	ft_putchar(char c, int fd);
@@ -52,9 +59,12 @@ int		valid_check(t_map map);
 int		sameL(t_map map);
 int		checkchar(t_map map);
 int		checkchar2(t_map map);
+int		recup_fd(char *map);
 //fichier so_long.c
 t_map	failed_map(void);
 t_map	init_map(char *map);
 int		so_long(char *mapname);
+
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 #endif
