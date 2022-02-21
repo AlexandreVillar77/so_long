@@ -6,35 +6,29 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/02/21 11:48:11 by avillar          ###   ########.fr        #
+#    Updated: 2021/09/06 11:51:56 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= so_long
+NAME		= libprintf.a
 
-SRC		=	so_long.c		\
-				map.c			\
-				utils.c			\
-				map2.c			\
+SRCS		=	ft_printf.c			\
+				ft_printf_utils1.c	\
+				ft_convert_base1.c	\
+				ft_convert_base2.c	\
+				ft_printf_utils2.c	\
+				ft_printf_utils3.c	\
+				struct_utils.c		\
 
-
-SRCS	=	test.c
-
-OBJS	= $(addprefix src/, ${SRC:.c=.o})
-
-all:		${NAME}
+OBJS		= $(addprefix src/, ${SRCS:.c=.o})
 
 .c.o:
-			$(CC) -Wall -Wextra -Werror -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
+			gcc -Wall -Wextra -Werror -c -I./includes/header.h $< -o $< -o ${<:.c=.o}
 
-${NAME}:	mlx printf ${OBJS}
-			$(CC) $(OBJS) -Lft_printf -lprintf -Lmlx_mac -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+${NAME}:	${OBJS}
+			ar -rcs $@ $^
 
-mlx :
-	make -C mlx_mac
-
-printf :
-	make -C ft_printf
+all:		${NAME}
 
 clean:
 			rm -f ${OBJS}

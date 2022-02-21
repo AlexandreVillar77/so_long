@@ -58,10 +58,12 @@ int	main(int argc, char **argv)
 	int	i;
 
 	i = 0;
+	(void)argv;
 	if (argc < 2)
 	{
 		ft_putstr("veuillez renseigner le nom d'une map.\n", 1);
 		exit (0);
 	}
+	ft_printf("test test\n");
 	//so_long(argv[1]);
 }
