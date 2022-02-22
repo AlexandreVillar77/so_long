@@ -93,3 +93,11 @@ int	recup_fd(char *map)
 	}
 	return (fd);
 }
+
+void	copymap(t_mlx *data, t_map *map)
+{
+	data->map->h = map->h;
+	data->map->l = map->l;
+	data->map->map = map->map;
+	free(map->map);
+}

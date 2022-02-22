@@ -22,39 +22,43 @@ t_map	failed_map(void)
 	return (mapres);
 }
 
-t_map	init_map(char *map)
+void	init_map(char *map, t_map *data)
 {
 	int		i;
 	int		x;
-	t_map	mapres;
 
 	i = 0;
 	x = 0;
 	while (map[i] != '\n')
 		i++;
-	mapres.l = i;
+	data->l = i;
 	while (map[x])
 		x += i;
-	mapres.h = x / i - 1;
-	mapres.map = malloc(sizeof(char) * ft_strlen(map) + 1);
-	if (!mapres.map)
-		return (failed_map());
-	mapres.map = ft_strcpy(map);
-	return (mapres);
+	data->h = x / i - 1;
+	data->map = ft_strcpy(map);
+	free (map);
 }
 
 int	so_long(char *mapname)
 {
+	//t_mlx	data;
 	t_map	map;
-	t_mlx	data;
 
-	map = init_map(recup_map(mapname));
+	init_map(recup_map(mapname), &map);
+	if (!map.map)
+		return (1);
+	/*copymap(&data, &map);
 	//printf("retour du check %d \n", valid_check(map));
-	//printf("ma map = \n%s", map.map);
+	//ft_printf("ma map = \n%s", map.map);
 	create_mlx(&data);
 	if (data.mlx_ptr == NULL || data.win_ptr == NULL)
+	{
+		ft_printf("\nerreur malloc mlx\n");
 		return (1);
-	mloop(&data);
+	}
+	//mloop(&data);
+	free(data.mlx_ptr);*/
+	free(map.map);
 	return (0);
 }
 
@@ -70,5 +74,8 @@ int	main(int argc, char **argv)
 	}
 	so_long(argv[1]);
 	ft_printf("test test\n");
+	while (1){
+
+	}
 	return (0);
 }

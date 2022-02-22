@@ -19,7 +19,11 @@ int	handle_input(int keysim, t_mlx *data)
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		free(data->mlx_ptr);
+		free(data->map->map);
 		ft_printf("succesfully exited\n");
+		while(1){
+
+		}
 		exit(0);
 	}
 	return (0);

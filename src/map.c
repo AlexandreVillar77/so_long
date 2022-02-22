@@ -96,23 +96,23 @@ int	valid_check(t_map map)
 {
 	if (sameL(map) == 1)
 	{
-		printf("la map n'est pas rectangulaire\n");
+		ft_printf("la map n'est pas rectangulaire\n");
 		return (1);
 	}
 	if (check_rectangle(map) == 1)
 	{
-		printf("la map n'est pas fermer par des 1 de tout les côté\n");
+		ft_printf("la map n'est pas fermer par des 1 de tout les côté\n");
 		return (1);
 	}
 	if (checkchar(map) == 1)
 	{
-		printf("la map n'est pas composer avec les cractères autoriser\n");
+		ft_printf("la map n'est pas composer avec les cractères autoriser\n");
 		return (1);
 	}
 	if (checkchar2(map) == 1)
 	{
-		printf("la map ne dispose pas du minimum de sortie,");
-		printf("collectible et point depart requis\n");
+		ft_printf("la map ne dispose pas du minimum de sortie,");
+		ft_printf("collectible et point depart requis\n");
 		return (1);
 	}
 	return (0);

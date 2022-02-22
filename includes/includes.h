@@ -45,6 +45,7 @@ typedef struct s_img{
 typedef struct s_mlx{
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_map	*map;
 }	t_mlx;
 
 //fichier utils.c
@@ -63,9 +64,11 @@ int		sameL(t_map map);
 int		checkchar(t_map map);
 int		checkchar2(t_map map);
 int		recup_fd(char *map);
+void	copymap(t_mlx *data, t_map *map);
+
 //fichier so_long.c
 t_map	failed_map(void);
-t_map	init_map(char *map);
+void	init_map(char *map, t_map *data);
 int		so_long(char *mapname);
 
 //fichier mlx_utils.c

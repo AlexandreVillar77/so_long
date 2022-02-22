@@ -21,12 +21,14 @@ SRCS		=	so_long.c		\
 
 SRC	=	test.c
 
+CFLAG = -Wall -Wextra -Werror
+
 OBJS	= $(addprefix src/, ${SRCS:.c=.o})
 
 all:		${NAME}
 
 .c.o:
-			$(CC) -Wall -Wextra -Werror -g3 -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
+			$(CC)  $(CFLAG) -g3 -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
 
 ${NAME}:	mlx printf ${OBJS}
 			$(CC) $(OBJS) -Lft_printf -lprintf -Lmlx_mac -lmlx -framework OpenGL -framework AppKit -o $(NAME)
