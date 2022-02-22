@@ -6,26 +6,27 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/02/21 11:48:11 by avillar          ###   ########.fr        #
+#    Updated: 2022/02/22 12:27:58 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= so_long
 
-SRC		=	so_long.c		\
+SRCS		=	so_long.c		\
 				map.c			\
 				utils.c			\
 				map2.c			\
+				mlx_utils.c		\
 
 
-SRCS	=	test.c
+SRC	=	test.c
 
-OBJS	= $(addprefix src/, ${SRC:.c=.o})
+OBJS	= $(addprefix src/, ${SRCS:.c=.o})
 
 all:		${NAME}
 
 .c.o:
-			$(CC) -Wall -Wextra -Werror -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
+			$(CC) -Wall -Wextra -Werror -g3 -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
 
 ${NAME}:	mlx printf ${OBJS}
 			$(CC) $(OBJS) -Lft_printf -lprintf -Lmlx_mac -lmlx -framework OpenGL -framework AppKit -o $(NAME)

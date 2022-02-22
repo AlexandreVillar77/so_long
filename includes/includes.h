@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/07 12:18:55 by avillar          ###   ########.fr       */
+/*   Updated: 2022/02/22 12:52:50 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@
 # include <string.h>
 # include <mlx.h>
 # include <ft_printf.h>
-//# include <X11/keysim.h>
+# include "../mlx_mac/mlx.h"
 
+# define G_NAME "first game"
+# define WIN_L 920
+# define WIN_H 600
+# define ECHAP 53
 //structure pour la map
 typedef struct s_map{
 	int			h;
@@ -63,6 +67,11 @@ int		recup_fd(char *map);
 t_map	failed_map(void);
 t_map	init_map(char *map);
 int		so_long(char *mapname);
+
+//fichier mlx_utils.c
+int		handle_input(int keysim, t_mlx *data);
+void	create_mlx(t_mlx *data);
+void	mloop(t_mlx	*data);
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
