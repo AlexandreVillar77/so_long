@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/22 12:52:50 by avillar          ###   ########.fr       */
+/*   Updated: 2022/02/24 15:55:12 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
-# include <mlx.h>
 # include <ft_printf.h>
 # include "../mlx_mac/mlx.h"
 
@@ -35,17 +34,26 @@ typedef struct s_map{
 }				t_map;
 
 typedef struct s_img{
-	void		*img;
+	void		*mlx_img;
 	char		*addr;
 	int			bpp;
 	int			line_lgt;
 	int			endian;
 }				t_img;
 
+typedef struct s_rect{
+	int			x;
+	int			y;
+	int			width;
+	int			height;
+	int			color;
+}				t_rect;
+
 typedef struct s_mlx{
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_map	*map;
+	t_img	img;
 }	t_mlx;
 
 //fichier utils.c

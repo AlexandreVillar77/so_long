@@ -23,12 +23,14 @@ SRC	=	test.c
 
 CFLAG = -Wall -Wextra -Werror
 
+FSAN = -fsanitize=address -g3
+
 OBJS	= $(addprefix src/, ${SRCS:.c=.o})
 
 all:		${NAME}
 
 .c.o:
-			$(CC)  $(CFLAG) -g3 -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
+			$(CC)  $(CFLAG) -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
 
 ${NAME}:	mlx printf ${OBJS}
 			$(CC) $(OBJS) -Lft_printf -lprintf -Lmlx_mac -lmlx -framework OpenGL -framework AppKit -o $(NAME)

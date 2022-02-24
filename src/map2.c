@@ -96,6 +96,9 @@ int	recup_fd(char *map)
 
 void	copymap(t_mlx *data, t_map *map)
 {
+	data->map = malloc(sizeof(t_map));
+	if (!data->map)
+		ft_printf("big gail\n");
 	data->map->h = map->h;
 	data->map->l = map->l;
 	data->map->map = map->map;

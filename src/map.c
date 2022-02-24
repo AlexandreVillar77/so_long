@@ -43,13 +43,13 @@ char	*recup_map(char *map)
 	buf = malloc(sizeof(char) + 1);
 	if (!buf)
 		exit(0);
-	i = read(fd, buf, 10);
+	i = read(fd, buf, 1);
 	mapres = NULL;
 	while ((i > 0) && buf)
 	{
 		buf[i] = '\0';
 		mapres = checkbuf(buf, mapres);
-		i = read(fd, buf, 10);
+		i = read(fd, buf, 1);
 	}
 	close (fd);
 	free (buf);

@@ -36,6 +36,9 @@ int	handle_input(int keysim, t_mlx *data)
 		mlx_do_sync(data->mlx_ptr);
 		//ft_printf("mlx_ptr = %p\n", data->mlx_ptr);
 		free(data->mlx_ptr);
+		while (1){
+			// gros leaks
+		}
 		exit(0);
 	}
 	return (0);
@@ -56,9 +59,7 @@ int	main(void)
 	}
 	//mlx_loop_hook(data.mlx_ptr, &handle_no_events, &data);
 	mlx_key_hook(data.win_ptr, &handle_input, &data);
-	ft_printf("return de loop = %d \n", mlx_loop(data.mlx_ptr));
-	free(data.mlx_ptr);
-	ft_printf("pass\n");
+	mlx_loop(data.mlx_ptr);
 	//mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	//free(data.mlx_ptr);
 	/*void	*mlx;
