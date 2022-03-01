@@ -6,60 +6,86 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 12:52:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/22 12:12:17 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/01 16:18:16 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_lgt + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-int	handle_no_events(void *data)
-{
-	void *y;
-	y = data;
-	return (0);
-}
-
 int	handle_input(int keysim, t_mlx *data)
 {
-	ft_printf("keysim = %d\n", keysim);
 	if (keysim == ECHAP)
 	{
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_do_sync(data->mlx_ptr);
-		//ft_printf("mlx_ptr = %p\n", data->mlx_ptr);
 		free(data->mlx_ptr);
-		while (1){
-			// gros leaks
-		}
+		free(data->map);
+		ft_printf("succesfully exited\n");
 		exit(0);
 	}
 	return (0);
+}
+
+void	create_mlx(t_mlx *data)
+{
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return ;
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_L, WIN_H, G_NAME);
+	if (data->win_ptr == NULL)
+	{
+		free (data->mlx_ptr);
+		return ;
+	}
+}
+
+int		render_background(t_mlx *data)
+{
+	int		i;
+	int		j;
+	void	*img1;
+	int		imgWidth;
+	int		imgHeight;
+
+	i = 0;
+	j = 0;
+	img1 = mlx_xpm_file_to_image(&data->mlx_ptr, "../floor_2.xpm", &imgWidth, &imgHeight);
+	mlx_put_image_to_window(&data->mlx_ptr, &data->win_ptr, &img1, 0, 0);
+	/*while (i < WIN_H)
+	{
+		j = 0;
+		while (j < WIN_L)
+		{
+			mlx_put_image_to_window(&data->mlx_ptr, &data->win_ptr, &img1, i, j++);
+		}
+		++i;
+	}*/
+	return (0);
+}
+
+void	mloop(t_mlx	*data)
+{
+	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WIN_L, WIN_H);
+	mlx_loop_hook(data->mlx_ptr, &render_background, &data);
+	mlx_key_hook(data->win_ptr, &handle_input, data);
+	mlx_loop(data->mlx_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	free(data->mlx_ptr);
+	free(data->map);
 }
 
 int	main(void)
 {
 	t_mlx	data;
 
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
-		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 920, 600, "Test");
-	if (data.win_ptr == NULL)
+	create_mlx(&data);
+	if (data.mlx_ptr == NULL || data.win_ptr == NULL)
 	{
-		free(data.win_ptr);
+		ft_printf("\nerreur malloc mlx\n");
 		return (1);
 	}
-	//mlx_loop_hook(data.mlx_ptr, &handle_no_events, &data);
-	mlx_key_hook(data.win_ptr, &handle_input, &data);
-	mlx_loop(data.mlx_ptr);
+	mloop(&data);
+	return (0);
 	//mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	//free(data.mlx_ptr);
 	/*void	*mlx;

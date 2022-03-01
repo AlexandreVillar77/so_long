@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/24 15:55:12 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/01 15:51:08 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 # define WIN_L 920
 # define WIN_H 600
 # define ECHAP 53
+# define RED 0xFF0000
+# define GREEN 0xFF00
+# define WHITE 0xFFFFFF
+
+
 //structure pour la map
 typedef struct s_map{
 	int			h;
@@ -85,5 +90,12 @@ void	create_mlx(t_mlx *data);
 void	mloop(t_mlx	*data);
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+
+//fichier mlx_utils2.c
+//int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+void	img_pix_put(t_img *img, int x, int y, int color);
+int		render_rect(t_img *img, t_rect rect);
+int		render_background(t_mlx *data);
+int		render(t_mlx *data);
 
 #endif
