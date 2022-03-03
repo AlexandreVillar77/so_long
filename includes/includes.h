@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/01 15:51:08 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/03 13:36:22 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include <errno.h>
 # include <string.h>
 # include <ft_printf.h>
-# include "../mlx_mac/mlx.h"
+# include "../mlx_linux/mlx.h"
 
 # define G_NAME "first game"
 # define WIN_L 920
 # define WIN_H 600
-# define ECHAP 53
+# define ECHAP 65307 // 53 MAC / 65307 Linux
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF

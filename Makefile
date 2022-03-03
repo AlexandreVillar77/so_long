@@ -6,7 +6,7 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/03/01 16:14:51 by avillar          ###   ########.fr        #
+#    Updated: 2022/03/03 13:43:39 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,18 +26,25 @@ CFLAG = -Wall -Wextra -Werror
 
 FSAN = -fsanitize=address -g3
 
-OBJS	= $(addprefix src/, ${SRC:.c=.o})
+MAC = -Lmlx_mac -lmlx -framework OpenGL -framework AppKit
+
+LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+
+OBJS	= $(addprefix src/, ${SRCS:.c=.o})
 
 all:		${NAME}
 
 .c.o:
 			$(CC)  $(CFLAG) -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
 
-${NAME}:	mlx printf ${OBJS}
-			$(CC) $(OBJS) $(FSAN) -Lft_printf -lprintf -Lmlx_mac -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+${NAME}:	mlx_linux printf ${OBJS}
+			$(CC) $(OBJS) -Lft_printf -lprintf $(LINUX) -o $(NAME)
 
-mlx :
+mlx_mac :
 	make -C mlx_mac
+
+mlx_linux :
+	make -C mlx_linux
 
 printf :
 	make -C ft_printf
