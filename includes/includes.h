@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/03 13:36:22 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/03 15:47:41 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int		so_long(char *mapname);
 int		handle_input(int keysim, t_mlx *data);
 void	create_mlx(t_mlx *data);
 void	mloop(t_mlx	*data);
-
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	init_rect(t_rect *rect);
+int		make_img(char *xpm, t_mlx *data, t_rect *rect);
 
 //fichier mlx_utils2.c
 //int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:41:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/03 13:47:12 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:05:51 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,42 @@ int		render_rect(t_img *img, t_rect rect)
 
 int		render_background(t_mlx *data)
 {
-	int		x;
-	int		y;
+	t_rect	rect;
 
-	int		imgWidth;
-	int		imgHeight;
-
-	x = 0;
-	y = 0;
-		ft_printf("here\n");
-
-	data->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "../test.xpm", &imgWidth, &imgHeight);
-		ft_printf("here\n");
-
-	if (data->img.mlx_img == NULL)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	init_rect(&rect);
+	if (make_img("../floor.xpm", data, &rect) == 1)
 		return (1);
-	}
-	data->img.addr = mlx_get_data_addr(&data->img.mlx_img, &data->img.bpp, &data->img.line_lgt, &data->img.endian);
-	while (x < WIN_H)
+	while (rect.y < WIN_H)
 	{
-		y = 0;
-		while (y < WIN_L)
+		rect.x = 0;
+		while (rect.x < WIN_L)
 		{
-			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, y, x);
-			y += imgHeight;
+			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, rect.x, rect.y);
+			rect.x += rect.height;
 		}
-		x += imgWidth;
+		rect.y += rect.width;
+	}
+	return (0);
+}
+
+int		render_wall(t_mlx *data)
+{
+	t_rect	rect;
+
+	init_rect(&rect);
+	if (make_img("../wall.xpm", data, &rect) == 1)
+		return (1);
+	while (rect.x < WIN_L)
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, rect.x, rect.y);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, rect.x, (WIN_H - rect.height));
+		rect.x += rect.width;
+	}
+	while (rect.y < WIN_H)
+	{
+		rect.y += WIN_H;
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, rect.x, rect.y);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, rect.y);
 	}
 	return (0);
 }
@@ -81,7 +89,12 @@ int		render(t_mlx *data)
 {
 	if (data->win_ptr == NULL)
 		return (1);
-	render_background(data);
+	if (render_background(data) == 1)
+	{
+			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+			return (1);
+	}
+	render_wall(data);
 	/*render_rect(&data->img, (t_rect){WIN_L - 100, WIN_H - 100,
 		100, 100, GREEN});
 	render_rect(&data->img, (t_rect){0, 0, 500, 300, RED});

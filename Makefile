@@ -6,7 +6,7 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/03/03 13:43:39 by avillar          ###   ########.fr        #
+#    Updated: 2022/03/03 16:10:10 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC	=	test.c
 
 CFLAG = -Wall -Wextra -Werror
 
-FSAN = -fsanitize=address -g3
+FSAN = -g3
+CFLAG := $(FSAN)
 
 MAC = -Lmlx_mac -lmlx -framework OpenGL -framework AppKit
 

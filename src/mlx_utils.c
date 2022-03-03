@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:16:59 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/03 13:40:24 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:21:10 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ void	create_mlx(t_mlx *data)
 		free (data->mlx_ptr);
 		return ;
 	}
+}
+
+int		make_img(char *xpm, t_mlx *data, t_rect *rect)
+{
+	data->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, xpm, &rect->width, &rect->height);
+	if (data->img.mlx_img == NULL)
+	{
+		ft_printf("here\n");
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		return (1);
+	}
+	return (0);
+}
+
+void	init_rect(t_rect *rect)
+{
+	rect->x = 0;
+	rect->y = 0;
+	rect->width = 0;
+	rect->height = 0;
+	rect->color = 0;
 }
 
 void	mloop(t_mlx	*data)

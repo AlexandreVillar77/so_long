@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/24 15:47:54 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:18:28 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,23 @@ void	init_map(char *map, t_map *data)
 
 int	so_long(char *mapname)
 {
-	t_mlx	data;
+	t_mlx	*data;
 	t_map	map;
 
+	data = malloc(sizeof(t_mlx));
+	if (data == NULL)
+		return (1);
 	init_map(recup_map(mapname), &map);
 	if (!map.map)
 		return (1);
-	copymap(&data, &map);
-	create_mlx(&data);
-	if (data.mlx_ptr == NULL || data.win_ptr == NULL)
+	copymap(data, &map);
+	create_mlx(data);
+	if (data->mlx_ptr == NULL || data->win_ptr == NULL)
 	{
 		ft_printf("\nerreur malloc mlx\n");
 		return (1);
 	}
-	mloop(&data);
+	mloop(data);
 	return (0);
 }
 
