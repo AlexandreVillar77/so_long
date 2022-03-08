@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/03 16:18:28 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:08:49 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_map(char *map, t_map *data)
 		x += i;
 	data->h = x / i - 1;
 	data->map = ft_strcpy(map);
+
 	free (map);
 }
 
@@ -52,6 +53,8 @@ int	so_long(char *mapname)
 		return (1);
 	copymap(data, &map);
 	create_mlx(data);
+	if (check_wins(data) == 1)
+		return (1);
 	if (data->mlx_ptr == NULL || data->win_ptr == NULL)
 	{
 		ft_printf("\nerreur malloc mlx\n");
@@ -72,6 +75,6 @@ int	main(int argc, char **argv)
 		exit (0);
 	}
 	so_long(argv[1]);
-	ft_printf("test test\n");
+	ft_printf("\n");
 	return (0);
 }

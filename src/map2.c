@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:10:51 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/02 14:31:53 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:07:40 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,11 @@ void	copymap(t_mlx *data, t_map *map)
 {
 	data->map = malloc(sizeof(t_map));
 	if (!data->map)
-		ft_printf("big gail\n");
+		ft_printf("big fail\n");
 	data->map->h = map->h;
 	data->map->l = map->l;
-	data->map->map = map->map;
+	data->map->map = ft_strcpy(map->map);
+	data->win_h = map->h * 64;
+	data->win_l = map->l * 64;
 	free(map->map);
 }

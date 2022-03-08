@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 12:52:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/03 13:37:52 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/08 12:36:48 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		render_background(t_mlx *data)
 
 	x = 0;
 	y = 0;
-	data->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./test.xpm", &imgWidth, &imgHeight);
+	data->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "./floor.xpm", &imgWidth, &imgHeight);
 	if (data->img.mlx_img == NULL)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
