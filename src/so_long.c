@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 13:17:05 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 16:27:02 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,27 @@ void	init_map(char *map, t_map *data)
 
 	i = 0;
 	x = 0;
-	while (map[i] != '\n')
+	data->size = ft_strlen(map);
+	while (map[i] != '\n' && map[i])
 		i++;
 	data->l = i;
-	while (map[x])
+	while (x < data->size && map[x])
 		x += i;
 	data->h = x / i - 1;
 	data->map = ft_strcpy(map);
+	free(map);
+}
 
-	free (map);
+void	a_free(t_mlx *data)
+{
+	if (data->mlx_ptr)
+		free(data->mlx_ptr);
+	if (data->map->map)
+		free(data->map->map);
+	if (data->map)
+		free(data->map);
+	if (data)
+		free(data);
 }
 
 int	so_long(char *mapname)
@@ -45,23 +57,24 @@ int	so_long(char *mapname)
 	t_mlx	*data;
 	t_map	map;
 
+	init_map(recup_map(mapname), &map);
+	if (!map.map || (valid_check(&map) == 1))
+		return (1);
 	data = malloc(sizeof(t_mlx));
 	if (data == NULL)
-		return (1);
-	init_map(recup_map(mapname), &map);
-	if (!map.map)
 		return (1);
 	copymap(data, &map);
 	create_mlx(data);
 	if (check_wins(data) == 1)
 		return (1);
-	if (data->mlx_ptr == NULL || data->win_ptr == NULL)
+	if (data->mlx_ptr == NULL)
 	{
-		ft_printf("\nerreur malloc mlx\n");
+		a_free(data);
+		ft_printf("Error\nerreur malloc mlx\n");
 		return (1);
 	}
-	data->img.mapdone = 0;
 	mloop(data);
+	a_free(data);
 	return (0);
 }
 

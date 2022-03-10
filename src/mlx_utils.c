@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:16:59 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 13:16:59 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 16:08:13 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	handle_input(int keysim, t_mlx *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_loop_end(data->mlx_ptr);
 	}
-	//ft_printf("keysim = %d\n", keysim);
 	if (keysim == W)
 		return (w_move(data));
 	else if (keysim == D)
@@ -39,9 +38,11 @@ void	create_mlx(t_mlx *data)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win_l, data->win_h, G_NAME);
 	if (data->win_ptr == NULL)
 	{
-		free (data->mlx_ptr);
+		a_free(data);
+		ft_printf("Error\n erreur de la mlx");
 		return ;
 	}
+	data->img.mapdone = 0;
 	init_player(data);
 }
 
@@ -82,8 +83,5 @@ void	mloop(t_mlx	*data)
 	mlx_key_hook(data->win_ptr, &handle_input, data);
 	mlx_loop(data->mlx_ptr);
 	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free(data->map->map);
-	free(data->map);
 	ft_printf("Successfully exited");
 }

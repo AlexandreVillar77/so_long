@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 13:02:08 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 16:23:39 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define WALL "./wall.xpm"
 # define COLLEC "./collec.xpm"
 # define PLAYER "./player.xpm"
+# define EXIT "./exit.xpm"
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
@@ -55,6 +56,8 @@ typedef struct s_map{
 	int			h;
 	int			l;
 	char		*map;
+	int			c_nb;
+	int			size;
 	t_player	p;
 }				t_map;
 
@@ -94,7 +97,7 @@ char	*checkbuf(char *buf, char *keep);
 char	*recup_map(char *map);
 int		check_border(t_map map, int x);
 int		check_rectangle(t_map map);
-int		valid_check(t_map map);
+int		valid_check(t_map *map);
 //fihcier map2.c
 int		sameL(t_map map);
 int		checkchar(t_map map);
@@ -105,6 +108,7 @@ void	copymap(t_mlx *data, t_map *map);
 //fichier so_long.c
 t_map	failed_map(void);
 void	init_map(char *map, t_map *data);
+void	a_free(t_mlx *data);
 int		so_long(char *mapname);
 
 //fichier mlx_utils.c
@@ -115,21 +119,24 @@ void	init_rect(t_rect *rect);
 int		make_img(char *xpm, t_mlx *data, t_rect *rect);
 
 //fichier mlx_utils2.c
-//int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_img *img, t_rect rect);
 int		render_background(t_mlx *data);
 int		render(t_mlx *data);
+int		render_owall(t_mlx *data);
 
 //fichier utils2.c
 int		check_wins(t_mlx *data);
 int		player_pos(t_mlx *data, char c);
 int		p_find(t_mlx *data);
 void	init_player(t_mlx *data);
+int		count_c(char *map);
 
 //fichier mlx_utils3.c
 int		render_player(t_mlx *data);
 int		render_collec(t_mlx *data);
+int		render_exit(t_mlx *data);
+int		check_end(t_mlx *data);
 
 //fichier handle_move.c
 int		erase_pos(t_mlx *data);

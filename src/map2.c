@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:10:51 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/08 16:07:40 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 15:51:02 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	recup_fd(char *map)
 	if (errno > 0)
 	{
 		close(fd);
-		perror("Error ");
+		perror("Error");
 		ft_putchar('\n', 1);
 		return (0);
 	}
@@ -98,11 +98,13 @@ void	copymap(t_mlx *data, t_map *map)
 {
 	data->map = malloc(sizeof(t_map));
 	if (!data->map)
-		ft_printf("big fail\n");
+		ft_printf("Error\nmalloc failed.\n");
 	data->map->h = map->h;
 	data->map->l = map->l;
 	data->map->map = ft_strcpy(map->map);
 	data->win_h = map->h * 64;
 	data->win_l = map->l * 64;
+	data->map->c_nb = count_c(map->map);
+	data->map->size = map->size;
 	free(map->map);
 }

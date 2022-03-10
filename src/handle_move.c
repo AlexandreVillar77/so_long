@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:29:46 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 13:17:49 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:58:11 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int		erase_pos(t_mlx *data)
 	init_rect(&rect);
 	if (make_img(FLOOR, data, &rect) == 1)
 		return (1);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, data->map->p.xpos * rect.width, data->map->p.ypos * rect.width);
+	if (data->map->map[data->map->p.index] != 'E')
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, data->map->p.xpos * rect.width, data->map->p.ypos * rect.width);
+	else if (data->map->map[data->map->p.index] == 'E')
+		render_exit(data);
+	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
 }
 

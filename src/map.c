@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 14:47:09 by avillar           #+#    #+#             */
-/*   Updated: 2022/02/02 14:40:35 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 16:27:28 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	check_rectangle(t_map map)
 	x = 0;
 	if (check_border(map, 0) == 1)
 		return (1);
-	while (map.map[x])
+	while (x < map.size && map.map[x])
 	{
 		if (map.map[x] != '1')
 			return (1);
@@ -85,34 +85,36 @@ int	check_rectangle(t_map map)
 			return (1);
 		x += 2;
 	}
-	//printf("x after = %d ,,,,, taille map = %d\", x, ft_strlen(map.map));
-	//printf("x = %d, map taille %d\n", (map.L + 1) * (map.H - 1), ft_strlen(map.map));
 	if (check_border(map, (map.l + 1) * (map.h - 1)) == 1)
 		return (1);
 	return (0);
 }
 
-int	valid_check(t_map map)
+int	valid_check(t_map *map)
 {
-	if (sameL(map) == 1)
+	if (sameL(*map) == 1)
 	{
-		ft_printf("la map n'est pas rectangulaire\n");
+		ft_printf("Error\nla map n'est pas rectangulaire\n");
+		free(map->map);
 		return (1);
 	}
-	if (check_rectangle(map) == 1)
+	if (check_rectangle(*map) == 1)
 	{
-		ft_printf("la map n'est pas fermer par des 1 de tout les côté\n");
+		ft_printf("Error\nla map n'est pas fermer par des 1 de tout les côté\n");
+		free(map->map);
 		return (1);
 	}
-	if (checkchar(map) == 1)
+	if (checkchar(*map) == 1)
 	{
-		ft_printf("la map n'est pas composer avec les cractères autoriser\n");
+		ft_printf("Error\nla map n'est pas composer avec les cractères autoriser\n");
+		free(map->map);
 		return (1);
 	}
-	if (checkchar2(map) == 1)
+	if (checkchar2(*map) == 1)
 	{
-		ft_printf("la map ne dispose pas du minimum de sortie,");
+		ft_printf("Error\nla map ne dispose pas du minimum de sortie,");
 		ft_printf("collectible et point depart requis\n");
+		free(map->map);
 		return (1);
 	}
 	return (0);

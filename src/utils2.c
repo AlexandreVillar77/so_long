@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 15:31:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 13:08:50 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 15:34:51 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int		check_wins(t_mlx *data)
 	if (data->win_l > l || data->win_h > h)
 	{
 		ft_printf("La map est trop grande merci de respecter une taille max de %dx%d", l/64, h/64);
-		free(data->map);
-		free(data->mlx_ptr);
+		a_free(data);
 		return (1);
 	}
 	return (0);
@@ -87,4 +86,20 @@ void	init_player(t_mlx *data)
 	data->map->p.ypos = player_pos(data, 'y');
 	data->map->p.collected = 0;
 	data->map->p.img = NULL;
+}
+
+int		count_c(char *map)
+{
+	int		i;
+	int		res;
+
+	i = 0;
+	res = 0;
+	while (map[i])
+	{
+		i++;
+		if (map[i] == 'C')
+			res++;
+	}
+	return (res);
 }
