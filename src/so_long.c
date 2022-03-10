@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/08 16:08:49 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 13:17:05 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	so_long(char *mapname)
 		ft_printf("\nerreur malloc mlx\n");
 		return (1);
 	}
+	data->img.mapdone = 0;
 	mloop(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 15:31:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/08 16:23:21 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 13:08:50 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,34 @@ int		player_pos(t_mlx *data, char c)
 				res--;
 			i++;
 		}
-		res += i % data->map->l + 1;
+		res += i % data->map->l;
 
 	}
 	else if (c == 'y')
 	{
 		while (data->map->map[i] && data->map->map[i] != 'P')
 		{
-			res = i / (data->map->l + 1) + 1;
+			res = i / (data->map->l + 1);
 			i++;
 		}
 	}
 	return (res);
+}
+
+int		p_find(t_mlx *data)
+{
+	int		i;
+	int		res;
+
+	res = 0;
+	i = 0;
+	while (data->map->map[i] && data->map->map[i] != 'P')
+	{
+		if (data->map->map[i] != '\n')
+			res++;
+		i++;
+	}
+	return (i);
 }
 
 void	init_player(t_mlx *data)
@@ -64,9 +80,11 @@ void	init_player(t_mlx *data)
 
 	width = 0;
 	height = 0;
+	data->map->p.index = p_find(data);
 	data->map->p.move = 1;
 	data->map->p.count = 0;
 	data->map->p.xpos = player_pos(data, 'x');
 	data->map->p.ypos = player_pos(data, 'y');
-	data->map->p.img = mlx_xpm_file_to_image(data->mlx_ptr, "../player.xpm", &width, &height);
+	data->map->p.collected = 0;
+	data->map->p.img = NULL;
 }

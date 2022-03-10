@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/08 16:18:59 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 13:02:08 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 # define G_NAME "first game"
 # define ECHAP 65307 // 53 MAC / 65307 Linux
+# define W 119
+# define D 100
+# define A 97
+# define S 115
+# define FLOOR "./floor.xpm"
+# define WALL "./wall.xpm"
+# define COLLEC "./collec.xpm"
+# define PLAYER "./player.xpm"
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
@@ -33,8 +41,10 @@
 
 typedef	struct s_player
 {
+	int			index;
 	int			move;
 	int			count;
+	int			collected;
 	int			xpos;
 	int			ypos;
 	void		*img;
@@ -114,6 +124,18 @@ int		render(t_mlx *data);
 //fichier utils2.c
 int		check_wins(t_mlx *data);
 int		player_pos(t_mlx *data, char c);
+int		p_find(t_mlx *data);
 void	init_player(t_mlx *data);
+
+//fichier mlx_utils3.c
+int		render_player(t_mlx *data);
+int		render_collec(t_mlx *data);
+
+//fichier handle_move.c
+int		erase_pos(t_mlx *data);
+int		w_move(t_mlx *data);
+int		d_move(t_mlx *data);
+int		a_move(t_mlx *data);
+int		s_move(t_mlx *data);
 
 #endif

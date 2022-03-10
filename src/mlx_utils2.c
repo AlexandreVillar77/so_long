@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:41:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/08 16:16:20 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 13:19:34 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		render_background(t_mlx *data)
 	t_rect	rect;
 
 	init_rect(&rect);
-	if (make_img("./floor.xpm", data, &rect) == 1)
+	if (make_img(FLOOR, data, &rect) == 1)
 		return (1);
 	data->img.addr = mlx_get_data_addr(&data->img.mlx_img, &data->img.bpp, &data->img.line_lgt, &data->img.endian);
 	while (rect.y < data->win_h)
@@ -61,10 +61,10 @@ int		render_background(t_mlx *data)
 
 int		render_wall(t_mlx *data)
 {
-	t_rect	rect;
+/*	t_rect	rect;
 
 	init_rect(&rect);
-	if (make_img("./wall.xpm", data, &rect) == 1)
+	if (make_img(WALL, data, &rect) == 1)
 		return (1);
 	while (rect.x < data->win_l)
 	{
@@ -78,7 +78,8 @@ int		render_wall(t_mlx *data)
 		rect.y += rect.height;
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, rect.x, rect.y);
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, rect.y);
-	}
+	}*/
+	render_owall(data);
 	return (0);
 }
 
@@ -97,11 +98,12 @@ int		render(t_mlx *data)
 	}
 	if (data->map->p.move == 1)
 	{
-		if (render_player(data) == 1 || render_collec(data) == 1)
+		if (render_collec(data) == 1 || render_player(data) == 1)
 		{
 			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 			return (1);
 		}
+		data->map->p.move = 0;
 	}
 	return (0);
 }

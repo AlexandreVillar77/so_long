@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:16:59 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/08 16:14:30 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/10 13:16:59 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ int	handle_input(int keysim, t_mlx *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_loop_end(data->mlx_ptr);
 	}
+	//ft_printf("keysim = %d\n", keysim);
+	if (keysim == W)
+		return (w_move(data));
+	else if (keysim == D)
+		return (d_move(data));
+	else if (keysim == A)
+		return (a_move(data));
+	else if (keysim == S)
+		return (s_move(data));
 	return (0);
 }
 
@@ -69,7 +78,6 @@ void	init_rect(t_rect *rect)
 
 void	mloop(t_mlx	*data)
 {
-	data->img.mapdone = 0;
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_key_hook(data->win_ptr, &handle_input, data);
 	mlx_loop(data->mlx_ptr);

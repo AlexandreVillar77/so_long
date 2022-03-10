@@ -6,7 +6,7 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/03/08 15:37:08 by avillar          ###   ########.fr        #
+#    Updated: 2022/03/10 12:41:10 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRCS		=	so_long.c		\
 				mlx_utils.c		\
 				mlx_utils2.c	\
 				utils2.c		\
+				mlx_utils3.c	\
+				handle_move.c	\
 
 
 SRC	=	test.c
