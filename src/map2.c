@@ -6,13 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:10:51 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 15:51:02 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:17:45 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-int	sameL(t_map map)
+int	samel(t_map map)
 {
 	int	x;
 	int	i;
@@ -42,7 +42,6 @@ int	checkchar(t_map map)
 		if (map.map[x] != '1' && map.map[x] != '0' && map.map[x] != '\n'
 			&& map.map[x] != 'P' && map.map[x] != 'E' && map.map[x] != 'C')
 		{
-			printf("x = %d\n", x);
 			return (1);
 		}
 		x++;
@@ -86,9 +85,7 @@ int	recup_fd(char *map)
 	fd = open(map, O_RDWR);
 	if (errno > 0)
 	{
-		close(fd);
 		perror("Error");
-		ft_putchar('\n', 1);
 		return (0);
 	}
 	return (fd);

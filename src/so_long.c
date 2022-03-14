@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 16:27:02 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 11:22:47 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	so_long(char *mapname)
 	if (data->mlx_ptr == NULL)
 	{
 		a_free(data);
-		ft_printf("Error\nerreur malloc mlx\n");
+		ft_printf("Error\nerror mlx malloc\n");
 		return (1);
 	}
 	mloop(data);
@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (argc < 2 || !(argv[1]))
 	{
-		ft_putstr("veuillez renseigner le nom d'une map.\n", 1);
+		ft_putstr("Error\nGive a map name as argument.", 1);
 		exit (0);
 	}
 	so_long(argv[1]);

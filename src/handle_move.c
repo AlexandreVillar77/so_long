@@ -6,28 +6,30 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:29:46 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 14:58:11 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:08:47 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-int		erase_pos(t_mlx *data)
+int	erase_pos(t_mlx *data)
 {
-	t_rect rect;
+	t_rect	rect;
 
 	init_rect(&rect);
 	if (make_img(FLOOR, data, &rect) == 1)
 		return (1);
 	if (data->map->map[data->map->p.index] != 'E')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, data->map->p.xpos * rect.width, data->map->p.ypos * rect.width);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img,
+			data->map->p.xpos * rect.width, data->map->p.ypos * rect.width);
 	else if (data->map->map[data->map->p.index] == 'E')
 		render_exit(data);
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	if (data->map->map[data->map->p.index] != 'E')
+		mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
 }
 
-int		w_move(t_mlx *data)
+int	w_move(t_mlx *data)
 {
 	if (data->map->map[data->map->p.index - (data->map->l + 1)] != '1')
 	{
@@ -41,7 +43,7 @@ int		w_move(t_mlx *data)
 	return (0);
 }
 
-int		d_move(t_mlx *data)
+int	d_move(t_mlx *data)
 {
 	if (data->map->map[data->map->p.index + 1] != '1')
 	{
@@ -55,7 +57,7 @@ int		d_move(t_mlx *data)
 	return (0);
 }
 
-int		a_move(t_mlx *data)
+int	a_move(t_mlx *data)
 {
 	if (data->map->map[data->map->p.index - 1] != '1')
 	{
@@ -69,7 +71,7 @@ int		a_move(t_mlx *data)
 	return (0);
 }
 
-int		s_move(t_mlx *data)
+int	s_move(t_mlx *data)
 {
 	if (data->map->map[data->map->p.index + (data->map->l + 1)] != '1')
 	{

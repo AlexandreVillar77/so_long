@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:21:21 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 15:25:20 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:29:40 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,26 @@ char	*ft_strcat(char *src, char *tmp)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+int	p_num(char *map)
+{
+	int	i;
+	int	c;
+	int	x;
+
+	x = 0;
+	c = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] == 'P')
+			c++;
+		if (map[i] == 'E')
+			x++;
+		if (c > 1 || x > 1)
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 15:31:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 15:34:51 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:34:52 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
 
-int		check_wins(t_mlx *data)
+int	check_wins(t_mlx *data)
 {
 	int		l;
 	int		h;
@@ -20,43 +20,32 @@ int		check_wins(t_mlx *data)
 	mlx_get_screen_size(data->mlx_ptr, &l, &h);
 	if (data->win_l > l || data->win_h > h)
 	{
-		ft_printf("La map est trop grande merci de respecter une taille max de %dx%d", l/64, h/64);
+		ft_printf("The map is to big please respect max size of %dx%d",
+			l / 64, h / 64);
 		a_free(data);
 		return (1);
 	}
 	return (0);
 }
 
-int		player_pos(t_mlx *data, char c)
+int	player_posx(t_mlx *data)
 {
 	int		i;
 	int		res;
 
 	i = 0;
 	res = 0;
-	if (c == 'x')
+	while (data->map->map[i] && data->map->map[i] != 'P')
 	{
-		while (data->map->map[i] && data->map->map[i] != 'P')
-		{
-			if (data->map->map[i] == '\n')
-				res--;
-			i++;
-		}
-		res += i % data->map->l;
-
+		if (data->map->map[i] == '\n')
+			res--;
+		i++;
 	}
-	else if (c == 'y')
-	{
-		while (data->map->map[i] && data->map->map[i] != 'P')
-		{
-			res = i / (data->map->l + 1);
-			i++;
-		}
-	}
+	res = (i + res) % data->map->l;
 	return (res);
 }
 
-int		p_find(t_mlx *data)
+int	p_find(t_mlx *data)
 {
 	int		i;
 	int		res;
@@ -82,13 +71,13 @@ void	init_player(t_mlx *data)
 	data->map->p.index = p_find(data);
 	data->map->p.move = 1;
 	data->map->p.count = 0;
-	data->map->p.xpos = player_pos(data, 'x');
-	data->map->p.ypos = player_pos(data, 'y');
+	data->map->p.xpos = player_posx(data);
+	data->map->p.ypos = player_posy(data);
 	data->map->p.collected = 0;
 	data->map->p.img = NULL;
 }
 
-int		count_c(char *map)
+int	count_c(char *map)
 {
 	int		i;
 	int		res;

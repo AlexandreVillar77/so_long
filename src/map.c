@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 14:47:09 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 16:27:28 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:10:35 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,24 @@ int	check_rectangle(t_map map)
 
 int	valid_check(t_map *map)
 {
-	if (sameL(*map) == 1)
+	if (check_rectangle(*map) == 1 || samel(*map) == 1)
 	{
-		ft_printf("Error\nla map n'est pas rectangulaire\n");
-		free(map->map);
-		return (1);
-	}
-	if (check_rectangle(*map) == 1)
-	{
-		ft_printf("Error\nla map n'est pas fermer par des 1 de tout les côté\n");
+		ft_printf("Error\nThe map is not surrounded by 1 or");
+		ft_printf(" the map is not a rectangle.");
 		free(map->map);
 		return (1);
 	}
 	if (checkchar(*map) == 1)
 	{
-		ft_printf("Error\nla map n'est pas composer avec les cractères autoriser\n");
+		ft_printf("Error\nThe map contains unsupported char or ");
 		free(map->map);
 		return (1);
 	}
-	if (checkchar2(*map) == 1)
+	if (checkchar2(*map) == 1 || p_num(map->map) == 1)
 	{
-		ft_printf("Error\nla map ne dispose pas du minimum de sortie,");
-		ft_printf("collectible et point depart requis\n");
+		ft_printf("Error\nThe map do not contain the minimal number of exit,");
+		ft_printf(" starting position, collectible, as to much starting pos,");
+		ft_printf(" or/and exit.");
 		free(map->map);
 		return (1);
 	}
