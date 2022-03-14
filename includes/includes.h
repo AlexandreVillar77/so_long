@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/10 16:23:39 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:35:09 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,18 @@
 # define D 100
 # define A 97
 # define S 115
-# define FLOOR "./floor.xpm"
-# define WALL "./wall.xpm"
-# define COLLEC "./collec.xpm"
-# define PLAYER "./player.xpm"
-# define EXIT "./exit.xpm"
+# define FLOOR "./library/floor.xpm"
+# define WALL "./library/wall.xpm"
+# define COLLEC "./library/collec.xpm"
+# define PLAYER "./library/player.xpm"
+# define EXIT "./library/exit.xpm"
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define WHITE 0xFFFFFF
 
-
 //structure pour la map
 
-typedef	struct s_player
+typedef struct s_player
 {
 	int			index;
 	int			move;
@@ -50,7 +49,6 @@ typedef	struct s_player
 	int			ypos;
 	void		*img;
 }				t_player;
-
 
 typedef struct s_map{
 	int			h;
@@ -92,6 +90,7 @@ void	ft_putchar(char c, int fd);
 void	ft_putstr(char *str, int fd);
 char	*ft_strcpy(char *src);
 char	*ft_strcat(char *src, char *tmp);
+int		p_num(char *map);
 //fonction fichier map.c
 char	*checkbuf(char *buf, char *keep);
 char	*recup_map(char *map);
@@ -99,7 +98,7 @@ int		check_border(t_map map, int x);
 int		check_rectangle(t_map map);
 int		valid_check(t_map *map);
 //fihcier map2.c
-int		sameL(t_map map);
+int		samel(t_map map);
 int		checkchar(t_map map);
 int		checkchar2(t_map map);
 int		recup_fd(char *map);
@@ -127,7 +126,7 @@ int		render_owall(t_mlx *data);
 
 //fichier utils2.c
 int		check_wins(t_mlx *data);
-int		player_pos(t_mlx *data, char c);
+int		player_posx(t_mlx *data);
 int		p_find(t_mlx *data);
 void	init_player(t_mlx *data);
 int		count_c(char *map);
@@ -137,6 +136,7 @@ int		render_player(t_mlx *data);
 int		render_collec(t_mlx *data);
 int		render_exit(t_mlx *data);
 int		check_end(t_mlx *data);
+int		rtnerr(char *str);
 
 //fichier handle_move.c
 int		erase_pos(t_mlx *data);
@@ -144,5 +144,8 @@ int		w_move(t_mlx *data);
 int		d_move(t_mlx *data);
 int		a_move(t_mlx *data);
 int		s_move(t_mlx *data);
+
+//fichier utils3.c
+int		player_posy(t_mlx *data);
 
 #endif
