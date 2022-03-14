@@ -6,7 +6,7 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/03/10 15:02:40 by avillar          ###   ########.fr        #
+#    Updated: 2022/03/14 13:33:52 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ SRCS		=	so_long.c		\
 				utils2.c		\
 				mlx_utils3.c	\
 				handle_move.c	\
+				utils3.c		\
 
-
-SRC	=	test.c
 
 CFLAG = -Wall -Wextra -Werror
 
 FSAN = -g3
+
 CFLAG := $(FSAN)
 
 MAC = -Lmlx_mac -lmlx -framework OpenGL -framework AppKit
@@ -36,7 +36,7 @@ LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 OBJS	= $(addprefix src/, ${SRCS:.c=.o})
 
-all:	mlx_linux/libmlx_Linux.a printf/libprintf.a ${NAME}
+all:	mlx_linux/libmlx_Linux.a ft_printf/libprintf.a ${NAME}
 
 .c.o:
 			$(CC)  $(CFLAG) -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
@@ -50,7 +50,7 @@ mlx_mac :
 mlx_linux/libmlx_Linux.a :
 	make -C mlx_linux
 
-printf/libprintf.a :
+ft_printf/libprintf.a :
 	make -C ft_printf
 
 clean:
@@ -58,6 +58,7 @@ clean:
 
 fclean:		clean
 			make -C mlx_linux clean
+			make -C ft_printf fclean
 			rm -f ${NAME}
 
 re:			fclean all
