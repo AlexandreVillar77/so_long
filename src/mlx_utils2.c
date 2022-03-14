@@ -74,7 +74,7 @@ int	render_owall(t_mlx *data)
 	init_rect(&rect);
 	if (make_img(WALL, data, &rect) == 1)
 		return (rtnerr("wall"));
-	while (data->map->map[i++])
+	while (data->map->map[i])
 	{
 		if (data->map->map[i] == '1')
 		{
@@ -85,6 +85,7 @@ int	render_owall(t_mlx *data)
 		}
 		if (data->map->map[i] != '\n')
 			t++;
+		i++;
 	}
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
