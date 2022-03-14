@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:31:13 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 14:53:40 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:22:56 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,12 @@ int	check_map_name(char *map)
 	while (map[t] && str[t])
 	{
 		if (map[t] != str[t])
+		{
 			return (1);
+			free(str);
+		}
 		t++;
 	}
+	free(str);
 	return (0);
 }
