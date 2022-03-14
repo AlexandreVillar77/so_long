@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:35:09 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/14 15:31:40 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,6 @@ int		s_move(t_mlx *data);
 
 //fichier utils3.c
 int		player_posy(t_mlx *data);
+int		check_map_name(char *map);
 
 #endif
