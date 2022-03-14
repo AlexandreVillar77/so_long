@@ -45,7 +45,7 @@ int	render_collec(t_mlx *data)
 	init_rect(&rect);
 	if (make_img(COLLEC, data, &rect) == 1)
 		return (rtnerr("Collectibles"));
-	while (data->map->map[i++])
+	while (data->map->map[i])
 	{
 		if (data->map->map[i] == 'C')
 		{
@@ -56,6 +56,7 @@ int	render_collec(t_mlx *data)
 		}
 		if (data->map->map[i] != '\n')
 			t++;
+		i++;
 	}
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
