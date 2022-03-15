@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:31:13 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 15:31:36 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/15 11:36:25 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	check_map_name(char *map)
 	str = ft_strcpy(".ber");
 	while (map[i])
 		i++;
-	map = map + (i - 4);
+	if (i > 4)
+		map = map + (i - 4);
 	while (map[t] && str[t])
 	{
-		if (map[t] != str[t])
+		if (map[t] != str[t] || i < 5)
 		{
 			free(str);
 			return (1);
