@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:25:53 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/17 11:27:55 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:16:07 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		so_long(char *mapname);
 
 //fichier mlx_utils.c
 int		handle_input(int keysim, t_mlx *data);
-void	create_mlx(t_mlx *data);
+int		create_mlx(t_mlx *data);
 void	mloop(t_mlx	*data);
 void	init_rect(t_rect *rect);
 int		make_img(char *xpm, t_mlx *data, t_rect *rect);
