@@ -6,7 +6,7 @@
 #    By: avillar <avillar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 11:34:20 by avillar           #+#    #+#              #
-#    Updated: 2022/03/14 13:33:52 by avillar          ###   ########.fr        #
+#    Updated: 2022/03/17 12:13:17 by avillar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ OBJS	= $(addprefix src/, ${SRCS:.c=.o})
 all:	mlx_linux/libmlx_Linux.a ft_printf/libprintf.a ${NAME}
 
 .c.o:
-			$(CC)  $(CFLAG) -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
+			$(CC)  $(CFLAG) -g3 -Imlx -Ift_printf -c -I/includes/includes.h $< -o $@
 
 ${NAME}: ${OBJS}
 			$(CC) $(OBJS) -Lft_printf -lprintf $(LINUX) -o $(NAME)

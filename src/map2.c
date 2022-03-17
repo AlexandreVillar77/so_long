@@ -6,11 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:10:51 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:17:45 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:04:38 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+//s2rie de fonction pour checker si le contenu de la map est bon
 
 int	samel(t_map map)
 {
@@ -90,6 +92,9 @@ int	recup_fd(char *map)
 	}
 	return (fd);
 }
+
+// on met le contenu de la structure de la map dans la
+// structure map qui se trouve dans la structure de la mlx
 
 void	copymap(t_mlx *data, t_map *map)
 {

@@ -6,11 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:16:59 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:14:11 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/17 12:05:33 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+//on gere l'action a executer en fonction de la touche presser
 
 int	handle_input(int keysim, t_mlx *data)
 {
@@ -31,6 +33,8 @@ int	handle_input(int keysim, t_mlx *data)
 	return (0);
 }
 
+//ici on cree la structure de notre mlx
+
 void	create_mlx(t_mlx *data)
 {
 	data->mlx_ptr = mlx_init();
@@ -47,6 +51,8 @@ void	create_mlx(t_mlx *data)
 	data->img.mapdone = 0;
 	init_player(data);
 }
+
+// la fonction qui nous permet de passer nos fichiers xpm en image
 
 int	make_img(char *xpm, t_mlx *data, t_rect *rect)
 {
@@ -71,6 +77,9 @@ int	make_img(char *xpm, t_mlx *data, t_rect *rect)
 	return (0);
 }
 
+// creation de la structure rect qui contiens les donnes 
+// permettant de bien positionner nos image dans la window
+
 void	init_rect(t_rect *rect)
 {
 	rect->x = 0;
@@ -80,10 +89,14 @@ void	init_rect(t_rect *rect)
 	rect->color = 0;
 }
 
+// la fonciton qui execute la mlx_loop
+
 void	mloop(t_mlx	*data)
 {
+	mlx_hook(data->win_ptr, 17, 0, &prog_leaver, data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_key_hook(data->win_ptr, &handle_input, data);
-	mlx_loop(data->mlx_ptr);
+	if (data->win_ptr && data->mlx_ptr)
+		mlx_loop(data->mlx_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 }

@@ -6,11 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:16:30 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:29:18 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:04:02 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+// affichage du player
 
 int	render_player(t_mlx *data)
 {
@@ -33,6 +35,8 @@ int	render_player(t_mlx *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
 }
+
+// affichage des collectibles
 
 int	render_collec(t_mlx *data)
 {
@@ -62,6 +66,8 @@ int	render_collec(t_mlx *data)
 	return (0);
 }
 
+// affichage de la sortie
+
 int	render_exit(t_mlx *data)
 {
 	t_rect	rect;
@@ -87,6 +93,9 @@ int	render_exit(t_mlx *data)
 	return (0);
 }
 
+// ici on verifie si le player a bien recuperer tout les 
+//collectible lorsque qu'il passe sur la case de sortie
+
 int	check_end(t_mlx *data)
 {
 	if (data->map->p.collected == data->map->c_nb
@@ -97,6 +106,8 @@ int	check_end(t_mlx *data)
 	}
 	return (0);
 }
+
+// une petite fonction qui gere les messages d'erreur
 
 int	rtnerr(char *str)
 {

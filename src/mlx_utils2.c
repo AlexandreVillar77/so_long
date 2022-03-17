@@ -6,11 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:41:50 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:27:47 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:04:19 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+// ces deux fonction permettent d'afficher un pixel dans la window
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
@@ -38,6 +40,9 @@ int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
+// cet fonction permet de creer tout le fond de la display a 
+//l'aide de l'image creer a partir du .xpm alias FLOOR
+
 int	render_background(t_mlx *data)
 {
 	t_rect	rect;
@@ -62,6 +67,8 @@ int	render_background(t_mlx *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
 }
+
+// pareil que au dessus mais avec les mur a l'aide de l'alias WALL
 
 int	render_owall(t_mlx *data)
 {
@@ -90,6 +97,10 @@ int	render_owall(t_mlx *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	return (0);
 }
+
+// la fonction appeler par mlx_loop_hook elle sera appeler a chaque 
+//evenement dans la boucle ce qui nous permet
+//de gere le personnage et sa recolte
 
 int	render(t_mlx *data)
 {

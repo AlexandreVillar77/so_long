@@ -6,18 +6,21 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:29:46 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:08:47 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/17 11:54:41 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+//efface le personnage pour le reafficher a son nouvel emplacement
 
 int	erase_pos(t_mlx *data)
 {
 	t_rect	rect;
 
 	init_rect(&rect);
-	if (make_img(FLOOR, data, &rect) == 1)
+	if (data->map->map[data->map->p.index] != 'E' &&
+		make_img(FLOOR, data, &rect) == 1)
 		return (1);
 	if (data->map->map[data->map->p.index] != 'E')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img,

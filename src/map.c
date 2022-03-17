@@ -6,11 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 14:47:09 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:10:35 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:04:46 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+//on ajoute ce que l'on vien de lire dans un string
 
 char	*checkbuf(char *buf, char *keep)
 {
@@ -29,6 +31,9 @@ char	*checkbuf(char *buf, char *keep)
 	free(tmp);
 	return (keep);
 }
+
+//on recupere tout les contenu du fichier map pour pouvoir
+// faire les verif dessus puis l'utiliser pour faire le jeu
 
 char	*recup_map(char *map)
 {
@@ -55,6 +60,8 @@ char	*recup_map(char *map)
 	free (buf);
 	return (mapres);
 }
+
+//une serie de check pour savoir si la map respecte les regles imposer
 
 int	check_border(t_map map, int x)
 {

@@ -6,11 +6,13 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 15:31:38 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/14 13:34:52 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:03:36 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/includes.h"
+
+//la fonction qui check ou en ai la recolte de collectible
 
 int	check_wins(t_mlx *data)
 {
@@ -27,6 +29,9 @@ int	check_wins(t_mlx *data)
 	}
 	return (0);
 }
+
+// recuperation de l'emplacement du joueur sur la map pour 
+//l'afficher dans la window selon les axe x et y
 
 int	player_posx(t_mlx *data)
 {
@@ -45,6 +50,8 @@ int	player_posx(t_mlx *data)
 	return (res);
 }
 
+// permet de trouver l'index au quel se trouve le joueur
+
 int	p_find(t_mlx *data)
 {
 	int		i;
@@ -61,6 +68,8 @@ int	p_find(t_mlx *data)
 	return (i);
 }
 
+// on initialise la structure du joueur dans la strucutre mlx
+
 void	init_player(t_mlx *data)
 {
 	int		width;
@@ -76,6 +85,9 @@ void	init_player(t_mlx *data)
 	data->map->p.collected = 0;
 	data->map->p.img = NULL;
 }
+
+// permet de compter le nombre de collectible sur la map pour savoir
+//combien le player doit en recolter
 
 int	count_c(char *map)
 {
