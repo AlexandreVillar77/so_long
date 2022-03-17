@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:16:59 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/17 12:05:33 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:17:23 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,26 @@ int	handle_input(int keysim, t_mlx *data)
 
 //ici on cree la structure de notre mlx
 
-void	create_mlx(t_mlx *data)
+int	create_mlx(t_mlx *data)
 {
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
-		return ;
+	{
+		a_free(data);
+		ft_printf("Error\nMLX error");
+		return (1);
+	}
 	data->win_ptr = (mlx_new_window(data->mlx_ptr, data->win_l,
 				data->win_h, G_NAME));
 	if (data->win_ptr == NULL)
 	{
 		a_free(data);
 		ft_printf("Error\nMLX error");
-		return ;
+		return (1);
 	}
 	data->img.mapdone = 0;
 	init_player(data);
+	return (0);
 }
 
 // la fonction qui nous permet de passer nos fichiers xpm en image

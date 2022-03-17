@@ -6,7 +6,7 @@
 /*   By: avillar <avillar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:18:27 by avillar           #+#    #+#             */
-/*   Updated: 2022/03/15 15:03:54 by avillar          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:15:34 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	init_map(char *map, t_map *data)
 {
 	int		i;
 	int		x;
+	int		n;
 
 	i = 0;
+	n = 0;
 	x = 0;
 	if (map == NULL)
 	{
@@ -44,8 +46,12 @@ void	init_map(char *map, t_map *data)
 		i++;
 	data->l = i;
 	while (x < data->size && map[x])
-		x += i;
-	data->h = x / i - 1;
+	{
+		if (map[x] == '\n')
+			n++;
+		x++;
+	}
+	data->h = (x - n) / i;
 	data->map = ft_strcpy(map);
 	free(map);
 }
@@ -78,7 +84,8 @@ int	so_long(char *mapname)
 	if (data == NULL)
 		return (1);
 	copymap(data, &map);
-	create_mlx(data);
+	if (create_mlx(data) == 1)
+		return (1);
 	if (check_wins(data) == 1)
 		return (1);
 	if (data->mlx_ptr == NULL)
@@ -107,7 +114,11 @@ int	main(int argc, char **argv)
 		ft_printf("Error\nWrong map name make sure it end with \".ber\".\n");
 		return (1);
 	}
-	so_long(argv[1]);
+	if (so_long(argv[1]) == 1)
+	{
+		ft_printf("\n");
+		return (1);
+	}
 	ft_printf("\n");
 	return (0);
 }
